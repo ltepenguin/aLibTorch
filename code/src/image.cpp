@@ -76,6 +76,17 @@ agl::Image::spData create_image(Tensor tensor, std::string name)
 
 agl::Texture create_texture(Tensor tensor, std::string name, int width, int height, bool gl_nearest)
 {
+    if(tensor.dim() != 3)
+    {
+        std::cerr << "texture! Tensor dim must be 3: " << tensor.sizes() << std::endl;
+        assert(tensor.dim() == 3);
+    }
+    
+    if(tensor.size(0) == 1)
+    {
+        tensor = tensor.repeat_interleave(3, 0);
+    }
+
     tensor = tensor.contiguous();
     tensor = image_resize(tensor, width, height).set_requires_grad(false);
     auto image = create_image(tensor, name);

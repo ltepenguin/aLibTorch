@@ -13,9 +13,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 # set external directory
 set(EXT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/ext)
 
-# Requires aOpenGL
-set(AGL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../aOpenGL)
-
 # libtorch
 set(Torch_DIR ${EXT_DIR}/libtorch/share/cmake/Torch)
 find_package(Torch REQUIRED)
