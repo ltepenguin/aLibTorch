@@ -2,12 +2,43 @@
 #include <aLibTorch.h>
 
 #define DEV torch::kCUDA
+#define USE_CNN 1
 
 // -------------------------------------------------------------------------- //
 
 class EncoderImpl : public nnModule
 {
 public:
+#if USE_CNN
+    Conv2d conv1, conv2, conv3;
+    Linear linear1, linear2;
+    torch::Device dev;
+
+    // conv size
+    // 13 = (28 - 4) / 2 + 1
+    // 11 = (13 - 3) / 1 + 1
+    //  9 = (11 - 3) / 1 + 1
+    EncoderImpl():
+        conv1(register_module("conv1", Conv2d(Conv2dOptions(1, 4, 4).stride(2).bias(true)))),
+        conv2(register_module("conv2", Conv2d(Conv2dOptions(4, 8, 3).stride(1).bias(true)))),
+        conv3(register_module("conv3", Conv2d(Conv2dOptions(8, 8, 3).stride(1).bias(true)))),
+        linear1(register_module("linear1", Linear(LinearOptions(9 * 9 * 8, 128).bias(true)))),
+        linear2(register_module("linear2", Linear(LinearOptions(128, 32).bias(true)))),
+        dev(torch::kCPU)
+    {
+    }
+
+    Tensor forward(Tensor x)
+    {
+        x = torch::relu(conv1(x));
+        x = torch::relu(conv2(x));
+        x = torch::relu(conv3(x));  // batch x 4 x (9 x 9)
+        x = x.flatten(1, 3);
+        x = torch::relu(linear1(x));
+        x = torch::tanh(linear2(x));
+        return x;
+    }
+#else
     Linear linear1, linear2, linear3;
     torch::Device dev;
 
@@ -26,6 +57,7 @@ public:
         x = torch::tanh(linear3(x));
         return x;
     }
+#endif
 };
 TORCH_MODULE(Encoder);
 
@@ -34,6 +66,32 @@ TORCH_MODULE(Encoder);
 class DecoderImpl : public nnModule
 {
 public:
+#if USE_CNN
+    ConvT2d conv1, conv2, conv3;
+    Linear linear1, linear2;
+    torch::Device dev;
+
+    DecoderImpl():
+        linear1(register_module("linear1", Linear(LinearOptions(32, 128).bias(true)))),
+        linear2(register_module("linear2", Linear(LinearOptions(128, 9 * 9 * 8).bias(true)))),
+        conv1(register_module("convT1", ConvT2d(ConvT2dOptions(8, 8, 3).stride(1).bias(true)))),
+        conv2(register_module("convT2", ConvT2d(ConvT2dOptions(8, 4, 3).stride(1).bias(true)))),
+        conv3(register_module("convT3", ConvT2d(ConvT2dOptions(4, 1, 4).stride(2).bias(true)))),
+        dev(torch::kCPU)
+    {
+    }
+
+    Tensor forward(Tensor x)
+    {
+        x = torch::relu(linear1(x));
+        x = torch::relu(linear2(x));
+        x = x.reshape({x.size(0), 8, 9, 9});
+        x = torch::relu(conv1(x));
+        x = torch::relu(conv2(x));
+        x = torch::tanh(conv3(x));
+        return x;
+    }
+#else
     Linear linear1, linear2, linear3;
     torch::Device dev;
 
@@ -52,6 +110,7 @@ public:
         x = torch::tanh(linear3(x));
         return x;
     }
+#endif
 };
 TORCH_MODULE(Decoder);
 
@@ -81,7 +140,8 @@ public:
         // initialize
         encoder->to(DEV);
         decoder->to(DEV);
-        iterate(0, false);
+        //iterate(0, false);
+        iterate(1, true);
     }
 
     void iterate(int interate_n, bool change_texture)
@@ -110,8 +170,11 @@ public:
         {
             // get batch
             Tensor batch_imgs = iterator->data;              // batch x 1 x 28 x 28
-            Tensor input = batch_imgs.to(DEV).flatten(2, 3); // batch x 1 x 784
-            
+#if USE_CNN
+            Tensor input = batch_imgs.to(DEV);
+#else
+            Tensor input = batch_imgs.to(DEV).flatten(1, 3); // batch x 784
+#endif            
             // loss
             Tensor latent_z = encoder->forward(input);
             Tensor output = decoder->forward(latent_z);
@@ -138,16 +201,19 @@ public:
                 {
                     test_batch_imgs  = batch_imgs.to(torch::kCPU);
                 }
-                
-                Tensor test_input = test_batch_imgs.to(DEV).flatten(2, 3);
+#if USE_CNN
+                Tensor test_input = test_batch_imgs.to(DEV);
+#else
+                Tensor test_input = test_batch_imgs.to(DEV).flatten(1, 3);
+#endif
                 Tensor test_latent_z = encoder->forward(test_input);
-                Tensor test_output   = decoder->forward(test_latent_z);
+                Tensor test_output = decoder->forward(test_latent_z);
                 Tensor test_output_imgs = test_output.to(torch::kCPU).reshape(data_size);
 
                 // value range: 0 ~ 255.0f
                 Tensor input_rgb_imgs  = 255.0f * 0.5f * (test_batch_imgs + 1.0f);
                 Tensor output_rgb_imgs = 255.0f * 0.5f * (test_output_imgs + 1.0f);
-                Tensor latent_rgb_imgs = 255.0f * 0.5f * (test_latent_z.unsqueeze(1) + 1.0f);
+                Tensor latent_rgb_imgs = 255.0f * 0.5f * (test_latent_z.unsqueeze(1).unsqueeze(1) + 1.0f);
 
                 alt::create_texture( input_rgb_imgs[0],  "input", 256, 256, true);
                 alt::create_texture(latent_rgb_imgs[0], "latent", 256, 256, true);

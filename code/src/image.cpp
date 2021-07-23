@@ -78,7 +78,7 @@ agl::Texture create_texture(Tensor tensor, std::string name, int width, int heig
 {
     if(tensor.dim() != 3)
     {
-        std::cerr << "texture! Tensor dim must be 3: " << tensor.sizes() << std::endl;
+        std::cerr << name << " texture error! Tensor dim must be 3: " << tensor.sizes() << std::endl;
         assert(tensor.dim() == 3);
     }
     
