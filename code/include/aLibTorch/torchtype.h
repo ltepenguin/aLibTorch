@@ -1,6 +1,7 @@
 #pragma once
 #include <aOpenGL.h>
 #include <torch/torch.h>
+#include <torch/csrc/jit/serialization/import.h>
 
 using Tensor         = ::torch::Tensor;
 using TensorList     = ::torch::TensorList;
