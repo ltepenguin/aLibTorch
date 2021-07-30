@@ -23,6 +23,12 @@ spPyModule import_pytorch_module(std::string path)
     return std::make_shared<PyModule>(path);
 }
 
+Tensor import_pytorch_tensor(std::string path, std::string attr)
+{
+    auto module = torch::jit::load(path);
+    return module.attr(attr).toTensor();
+}
+
 void export_to_pytorch(Tensor tensor, std::string path)
 {
     torch::save(tensor, path);
