@@ -88,6 +88,7 @@ agl::Texture create_texture(Tensor tensor, std::string name, int width, int heig
     }
 
     tensor = tensor.contiguous();
+    tensor = tensor.clamp(0, 255);
     tensor = image_resize(tensor, width, height).set_requires_grad(false);
     auto image = create_image(tensor, name);
     return agl::TextureLoader::create(name, image, gl_nearest);

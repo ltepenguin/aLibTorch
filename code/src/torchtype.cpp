@@ -83,4 +83,26 @@ void load_state_dict(const nnModule* src, nnModule* dst)
     return;
 }
 
+Tensor min_val(Tensor self, const std::vector<int>& dim)
+{
+    Tensor val = self;
+    Tensor indices;
+    for(int i = 0; i < dim.size(); ++i)
+    {
+        std::tie(val, indices) = val.min(dim.at(i), true);
+    }
+    return val.squeeze();
+}
+
+Tensor max_val(Tensor self, const std::vector<int>& dim)
+{
+    Tensor val = self;
+    Tensor indices;
+    for(int i = 0; i < dim.size(); ++i)
+    {
+        std::tie(val, indices) = val.max(dim.at(i), true);
+    }
+    return val.squeeze();
+}
+
 }

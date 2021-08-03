@@ -24,14 +24,17 @@ using ConvT2dOptions = ::torch::nn::ConvTranspose2dOptions;
 
 namespace a::lt {
 
-torch::Tensor vec_to_tensor(VecN vec);
-torch::Tensor mat_to_tensor(Mat mat);
+Tensor vec_to_tensor(VecN vec);
+Tensor mat_to_tensor(Mat mat);
 
 VecN tensor_to_vec(Tensor tensor);
 Mat  tensor_to_mat(Tensor tensor);
 
 // load parameters
 void load_state_dict(const nnModule* src, nnModule* dst);
+
+Tensor min_val(Tensor self, const std::vector<int>& dim);
+Tensor max_val(Tensor self, const std::vector<int>& dim);
 
 }
 
