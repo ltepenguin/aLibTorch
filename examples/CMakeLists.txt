@@ -9,3 +9,7 @@ target_link_libraries(mnist PUBLIC aLibTorch aOpenGL)
 # example 03
 add_executable(python ${CMAKE_CURRENT_SOURCE_DIR}/03_python.cpp)
 target_link_libraries(python PUBLIC aLibTorch aOpenGL)
+
+# example 04
+add_executable(footcontact ${CMAKE_CURRENT_SOURCE_DIR}/04_footcontact.cpp)
+target_link_libraries(footcontact PUBLIC aLibTorch aOpenGL)
