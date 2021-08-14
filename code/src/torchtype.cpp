@@ -45,9 +45,9 @@ Mat tensor_to_mat(Tensor tensor)
     int row = tensor.size(0);
     int col = tensor.size(1);
     
-    Mat mat(row, col);
+    Mat mat(col, row);
     std::memcpy(mat.data(), tensor.data_ptr(), sizeof(float)* row * col);
-    return mat;
+    return mat.transpose();
 }
 
 void load_state_dict(const nnModule* src, nnModule* dst)
