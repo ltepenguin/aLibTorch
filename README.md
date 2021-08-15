@@ -1,3 +1,9 @@
+## CUDA
+1. Download cuda: https://developer.nvidia.com/cuda-11.0-download-archive?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=2004&target_type=debnetwork.
+The last command should be:
+```
+sudo apt-get install cuda-11-0
+```
 ## LibTorch (Linux Version)
 1. Check cuda version of your computer
 ```
