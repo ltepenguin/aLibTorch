@@ -1,6 +1,7 @@
 add_library(aLibTorch SHARED 
     ${CMAKE_CURRENT_SOURCE_DIR}/src/image.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/pymodule.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/textfile.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/torchtype.cpp
 )
 
