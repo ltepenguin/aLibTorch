@@ -9,25 +9,25 @@ https://developer.nvidia.com/cuda-11.1.0-download-archive?target_os=Linux&target
 sudo apt-get -y install cuda-11-1
 ```
 
-2. CUDA를 설치를 확인합니다.
+2. CUDA 설치를 확인합니다.
 ```
 nvcc --version
 ```
-CUDA가 설치되어도 에러가 명령어를 찾지 못하는 경우가 있습니다. 다음 링크를 보고 에러를 수정하세요: https://ghostweb.tistory.com/829
+CUDA가 설치되어도 명령어를 찾지 못하는 경우가 있습니다. 다음 링크를 보고 에러를 수정하세요:
+https://askubuntu.com/questions/885610/nvcc-version-command-says-nvcc-is-not-installed
 
 ## Driver
 그래픽카드 드라이버가 CUDA 버전을 지원하는지 확인하세요.
 ```
 nvidia-smi
 ```
-여기에 보이는 CUDA version은 최대 지원 version 입니다. 따라서 다운로드한 CUDA는 해당 버전보다 낮아야 합니다.
+> nvidia-smi에 보이는 CUDA version은 최대 지원 version 입니다. 따라서 다운로드한 CUDA는 해당 버전보다 낮아야 합니다.
 
 ## cuDNN
 Download cuDNN: https://developer.nvidia.com/cudnn \
 CUDNN이 지원하는 CUDA 버전을 꼭 확인하세요. \
-CUDA 11.1 버전 기준으로 다음 버전을 다운로드 받았습니다: 
-- cuDNN v8.2.1 (June 7th, 2021), for CUDA 11.x
-- cuDNN Library for Linux (x86_64)
+CUDA 11.1 버전 기준으로 다음 버전을 다운로드합니다: cuDNN v8.2.1 (June 7th, 2021), for CUDA 11.x
+> cuDNN Library for Linux (x86_64) 으로 다운로드
 
 ## LibTorch (Linux Version)
 1. Check cuda version of your computer
