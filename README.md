@@ -44,7 +44,7 @@ CUDA 11.1 버전 기준으로 다음 버전을 다운로드합니다:
 ```
 tar -xzvf cudnn-x.x-linux-x64-v8.x.x.x.tgz
 ```
-3. CUDA tookit directory로 파일들을 복사하기위해 다음 명
+3. CUDA tookit directory로 파일들을 복사하기위해 다음 명령어
 ```
 sudo cp cuda/include/cudnn*.h /usr/local/cuda/include 
 sudo cp -P cuda/lib64/libcudnn* /usr/local/cuda/lib64 
