@@ -1,8 +1,9 @@
 ## aOpenGL
-aLibTorch는 aOpenGL이 필요합니다. 두 프로젝트는 같은 폴더 안에 있어야 합니다. \
+aLibTorch는 aOpenGL이 필요하며, aOpenGL을 먼저 빌드하고 aLibTorch를 빌드합니다. \
+두 프로젝트는 같은 폴더 안에 있어야 합니다. \
 예시: \
 aOpenGL path: `~/문서/aOpenGL` \
-aLibTorch path: `~/문서/aLibTorch`
+aLibTorch path: `~/문서/aLibTorch` \
 
 ## Settings
 
@@ -57,6 +58,8 @@ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
 3. 압축 해제한 `libtorch` 폴더 안의 파일들을 `aLibTorch/ext/libtorch` 폴더로 옮깁니다.
 
 ## Build
+> aOpenGL이 먼저 빌드되어야 합니다.
+> 
 다음 명령어들을 순차적으로 실행합니다.
 ```
 mkdir build
