@@ -1,3 +1,9 @@
+## aOpenGL
+aLibTorch는 aOpenGL이 필요합니다. 두 프로젝트는 같은 폴더 안에 있어야 합니다. \
+예시: \
+aOpenGL path: `~/문서/aOpenGL` \
+aLibTorch path: `~/문서/aLibTorch`
+
 ## Settings
 
 Libtorch를 사용하기 위해서는 올바른 버전의 CUDA, cuDNN, driver를 다운로드 받아야 합니다. \
