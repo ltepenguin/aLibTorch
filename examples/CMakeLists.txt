@@ -13,3 +13,7 @@ target_link_libraries(python PUBLIC aLibTorch aOpenGL)
 # example 04
 add_executable(footcontact ${CMAKE_CURRENT_SOURCE_DIR}/04_footcontact.cpp)
 target_link_libraries(footcontact PUBLIC aLibTorch aOpenGL)
+
+# example 05
+add_executable(training ${CMAKE_CURRENT_SOURCE_DIR}/05_training.cpp)
+target_link_libraries(training PUBLIC aLibTorch aOpenGL)
