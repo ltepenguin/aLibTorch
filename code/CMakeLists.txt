@@ -16,6 +16,7 @@ target_link_libraries(aLibTorch PRIVATE aOpenGL)
 target_include_directories(aLibTorch PUBLIC 
     ${EXT_DIR}/tensorboard_logger/include
     ${EXT_DIR}/tensorboard_logger/build)
+
 target_link_libraries(aLibTorch PUBLIC ${EXT_DIR}/tensorboard_logger/build/libtensorboard_logger.a)
 target_link_libraries(aLibTorch PUBLIC ${Protobuf_LIBRARIES})
 
