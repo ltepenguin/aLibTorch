@@ -10,6 +10,9 @@ aLibTorch path: `~/문서/aLibTorch` \
 Libtorch를 사용하기 위해서는 올바른 버전의 CUDA, cuDNN, driver를 다운로드 받아야 합니다. \
 본 문서는 CUDA 11.1을 기준을 작성되었습니다.
 
+## Protobuf
+sudo apt install -y protobuf-compiler
+
 ### CUDA
 1. CUDA 버전은 Libtorch가 지원하는 버전을 확인하고 다운로드합니다. \
 https://developer.nvidia.com/cuda-11.1.0-download-archive?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=2004&target_type=debnetwork \
