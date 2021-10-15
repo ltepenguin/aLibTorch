@@ -17,3 +17,7 @@ target_link_libraries(footcontact PUBLIC aLibTorch aOpenGL)
 # example 05
 add_executable(training ${CMAKE_CURRENT_SOURCE_DIR}/05_training.cpp)
 target_link_libraries(training PUBLIC aLibTorch aOpenGL)
+
+# example 06
+add_executable(tensorboard ${CMAKE_CURRENT_SOURCE_DIR}/06_tensorboard.cpp)
+target_link_libraries(tensorboard PUBLIC aLibTorch aOpenGL)

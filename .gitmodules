@@ -1,0 +1,3 @@
+[submodule "ext/tensorboard_logger"]
+	path = ext/tensorboard_logger
+	url = https://github.com/RustingSword/tensorboard_logger.git
