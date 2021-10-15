@@ -21,6 +21,9 @@ find_package(Torch REQUIRED)
 set(aOpenGL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../aOpenGL)
 find_package(aOpenGL REQUIRED)
 
+# tensorboard logger
+find_package(Protobuf REQUIRED)
+
 # multithreads
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
