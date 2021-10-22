@@ -3,3 +3,4 @@
 #include "aLibTorch/pymodule.h"
 #include "aLibTorch/textfile.h"
 #include "aLibTorch/torchtype.h"
+#include "aLibTorch/tquat.h"
