@@ -111,10 +111,10 @@ public:
         {
             Quat q = alt::tquat_to_quat(joint_Rs.at(i));
             Vec3 T = alt::tensor_to_vec(joint_Ts.at(i));
-            agl::Render::axis()
-                ->orientation(q.toRotationMatrix())
-                ->position(T)
-                ->draw();
+            // agl::Render::axis()
+            //     ->orientation(q.toRotationMatrix())
+            //     ->position(T)
+            //     ->draw();
         }
 
     }
