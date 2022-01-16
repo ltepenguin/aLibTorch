@@ -30,6 +30,7 @@ using LSTMOptions    = ::torch::nn::LSTMOptions;
 using MaxPool1d      = ::torch::nn::MaxPool1d;
 using MaxPool1dOptions = ::torch::nn::MaxPool1dOptions;
 using Dropout        = ::torch::nn::Dropout;
+using DropoutOptions = ::torch::nn::DropoutOptions;
 
 namespace a::lt {
 
