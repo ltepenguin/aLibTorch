@@ -25,6 +25,11 @@ using Conv2d         = ::torch::nn::Conv2d;
 using Conv2dOptions  = ::torch::nn::Conv2dOptions;
 using ConvT2d        = ::torch::nn::ConvTranspose2d;
 using ConvT2dOptions = ::torch::nn::ConvTranspose2dOptions;
+using LSTM           = ::torch::nn::LSTM;
+using LSTMOptions    = ::torch::nn::LSTMOptions;
+using MaxPool1d      = ::torch::nn::MaxPool1d;
+using MaxPool1dOptions = ::torch::nn::MaxPool1dOptions;
+using Dropout        = ::torch::nn::Dropout;
 
 namespace a::lt {
 
